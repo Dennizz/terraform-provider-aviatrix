@@ -1,3 +1,21 @@
+## 3.1.5 (Unreleased)
+
+### Notes:
+- Supported Controller version: **UserConnect-7.1.4105**
+- Supported Terraform version: **v1.x**
+
+### Bug Fixes:
+
+1. Fixed issue in **resource_aviatrix_firewall_instance_association** and **resource_aviatrix_gateway** for Azure where we no longer require special handling of ``fqdn_lan_interface``  and ``lan_interface``.
+2. Fixed issue in **aviatrix_edge_platform_device_onboarding** where importing was failing.
+### Features:
+#### Provider:
+1. Added support for the Terraform provider to properly set the user-agent when making requests.
+
+### Deprecations:
+
+1. Deprecated ``http_access`` in **aviatrix_controller_config**. This configuration value no longer has any effect. It will be removed from the Aviatrix provider in the 3.2.0 release.
+
 ## 3.1.4 (January 11, 2024)
 ### Notes:
 - Supported Controller version: **UserConnect-7.1.3006**
@@ -13,7 +31,7 @@
 4. Implemented a new attribute in **aviatrix_spoke_transit_attachment** to support configuring tunnel count:
    - ``tunnel_count``
 
-#### Secured Networking
+#### Secured Networking:
 1. Implemented a new data source to list all **aviatrix_smart_group**:
    - **aviatrix_smart_groups**
 
@@ -36,7 +54,7 @@
 10. Fixed issue where updating ``ha_private_mode_subnet_zone`` fails for Private Mode in **aviatrix_spoke_gateway** and **aviatrix_transit_gateway**
 11. Fixed issue where Single IP SNAT was not set correctly in **aviatrix_spoke_gateway**
 
-### Deprecations
+### Deprecations:
 1. Deprecated ``keep_alive_via_lan_interface_enabled`` in **aviatrix_firenet**. It will be removed from the Aviatrix provider in the next upcoming 3.2.0 release
 
 
@@ -168,7 +186,7 @@
       - ``flow_app_requirement``
       - ``decrypt_policy``
 
-### Deprecations
+### Deprecations:
 1. Removed support of **aviatrix_splunk_logging**, **aviatrix_filebeat_forwarder** and **aviatrix_sumologic_forwarder**
 
 
@@ -198,7 +216,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Settings
+#### Settings:
 1. Implemented a new resource to support Controller Security Group Management:
    - **aviatrix_controller_access_allow_list_config**
 
@@ -218,13 +236,13 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### CloudN
+#### CloudN:
 1. Restored support of CloudN transit attachment CIDR approval features in **aviatrix_cloudn_transit_gateway_attachment**:
     - ``enable_dead_peer_detection``
     - ``enable_learned_cidrs_approval``
     - ``approved_cidrs``
 
-#### Multi-Cloud Transit
+#### Multi-Cloud Transit:
 1. Implemented support for adding additional BGP over LAN interfaces to Azure Transit without redeploying **aviatrix_transit_gateway**
 
 ### Enhancements:
@@ -264,7 +282,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Site2Cloud
+#### Site2Cloud:
 1. Implemented support for remote identification using empty string in the following resources:
     - **aviatrix_site2cloud**
     - **aviatrix_spoke_external_device_conn**
@@ -274,7 +292,7 @@
 1. Fixed issue where FQDN tag's ``source_ip_list`` requires executing terraform apply twice for more than 2 gateways
 2. Fixed issue where ``eip`` is not valid for creating Azure **aviatrix_spoke_ha_gateway**
 
-### Deprecations
+### Deprecations:
 1. The following resource is removed:
     - **aviatrix_transit_cloudn_conn**
 
@@ -302,7 +320,7 @@
 6. Implemented a new resource to support Distributed Firewalling Intra VPC:
    - **aviatrix_distributed_firewalling_intra_vpc**
 
-#### Security
+#### Security:
 1. Implemented a new resource to support configuring FQDN Global settings:
    - **aviatrix_fqdn_global_config**
 
@@ -320,7 +338,7 @@
 4. Fixed issue where route table list is missing in state file while importing **aviatrix_aws_peering**
 5. Fixed issue where HA creation does not use the right CMK for volume encryption when CMK is provided in **aviatrix_spoke_gateway** and **aviatrix_transit_gateway**
 
-### Deprecations
+### Deprecations:
 1. The following resources are removed:
    - **aviatrix_arm_peer**
    - **aviatrix_aws_tgw_security_domain**
@@ -371,7 +389,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### CloudN
+#### CloudN:
 1. Restored support of CloudN transit attachment CIDR approval features in **aviatrix_cloudn_transit_gateway_attachment**:
     - ``enable_dead_peer_detection``
     - ``enable_learned_cidrs_approval``
@@ -387,7 +405,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Site2Cloud
+#### Site2Cloud:
 1. Implemented support for remote identification using empty string in the following resources:
     - **aviatrix_site2cloud**
     - **aviatrix_spoke_external_device_conn**
@@ -403,7 +421,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Site2Cloud
+#### Site2Cloud:
 1. Implemented support for Certificate-based HA Gateway Remote Identifier for Site2Cloud VPN:
     - New attributes in **aviatrix_site2cloud**:
         - ``backup_remote_identifier``
@@ -448,7 +466,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### CloudN
+#### CloudN:
 1. Restored support of CloudN transit attachment CIDR approval features in **aviatrix_cloudn_transit_gateway_attachment**:
     - ``enable_dead_peer_detection``
     - ``enable_learned_cidrs_approval``
@@ -470,7 +488,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Site2Cloud
+#### Site2Cloud:
 1. Implemented support for remote identification using empty string in the following resources:
     - **aviatrix_site2cloud**
     - **aviatrix_spoke_external_device_conn**
@@ -486,7 +504,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Site2Cloud
+#### Site2Cloud:
 1. Implemented support for Certificate-based HA Gateway Remote Identifier for Site2Cloud VPN:
    - New attributes in **aviatrix_site2cloud**:
      - ``backup_remote_identifier``
@@ -552,15 +570,15 @@
 6. Implemented support for creating multiple BGP over LAN interfaces in **aviatrix_transit_gateway** for Azure with the following new attribute:
   - ``bgp_lan_interfaces_count``
 
-#### Security
+#### Security:
 1. Implemented support for order of rules and rule addition to any place in **aviatrix_firewall_policy** with the following new attribute:
   - ``position``
 
-#### Settings
+#### Settings:
 1. Implemented a new resource to support CoPilot Security Group Management:
   - **aviatrix_copilot_security_group_management_config**
 
-#### Site2Cloud
+#### Site2Cloud:
 1. Implemented support for Certificate based Authentication for Site2Cloud VPN:
   - New attributes in **aviatrix_site2cloud**:
     - ``auth_type``
@@ -569,7 +587,7 @@
   - New resource:
     - **aviatrix_site2cloud_ca_cert_tag**
 
-#### TGW Orchestrator
+#### TGW Orchestrator:
 1. Implemented support for setting AWS TGW inspection mode in **aviatrix_aws_tgw** with the following new attribute:
   - ``inspection_mode``
 
@@ -591,7 +609,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### CloudN
+#### CloudN:
 1. Restored support of CloudN transit attachment CIDR approval features in **aviatrix_cloudn_transit_gateway_attachment**:
     - ``enable_dead_peer_detection``
     - ``enable_learned_cidrs_approval``
@@ -654,7 +672,7 @@
   - **aviatrix_app_domain**
   - **aviatrix_microseg_policy_list**
 
-#### Settings
+#### Settings:
 1. Implemented a new resource to support setting email configs for critical alerts and security events:
   - **aviatrix_controller_email_config**
 
@@ -672,7 +690,7 @@
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Gateway
+#### Gateway:
 1. Implemented support for setting rx queue size in **aviatrix_gateway**, **aviatrix_spoke_gateway** and **aviatrix_transit_gateway** with the following new attribute:
   - ``rx_queue_size``
 
@@ -681,7 +699,7 @@
   - ``bgp_md5_key``
   - ``backup_bgp_md5_key``
 
-#### CloudN
+#### CloudN:
 1. Implemented a new resource to support Edge as a CaaG:
   - **aviatrix_edge_caag**
 2. Implemented a new data source to get the list of device WAN interfaces:
@@ -713,7 +731,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
   - **aviatrix_app_domain**
   - **aviatrix_microseg_policy_list**
 
-### Deprecations
+### Deprecations:
 1. Deprecated support for CloudWAN. The following resources are removed:
   - **aviatrix_device_registration**
   - **aviatrix_device_tag**
@@ -789,12 +807,12 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Provider
+#### Provider:
 1. Implemented support for SSL certificate verification with the following new attributes in provider:
   - ``verify_ssl_certificate``
   - ``path_to_ca_certificate``
 
-#### Gateway
+#### Gateway:
 1. Implemented support to enable the feature to apply route entries into cloud platform routing table when using source NAT by adding the following attribute for **aviatrix_gateway_snat**:
   - ``apply_route_entry``
 
@@ -852,7 +870,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 8. Fixed issue where a service unavailable error may return when upgrading controller
 9. Fixed issue where deleting HA with insane mode enabled returns error in **aviatrix_gateway**, **aviatrix_spoke_gateway** and **aviatrix_transit_gateway**
 
-### Deprecations
+### Deprecations:
 1. Removed support for ``storage_name`` attribute from **aviatrix_gateway**, **aviatrix_spoke_gateway** and **aviatrix_transit_gateway** in AzureChina
 2. Removed support for Non-ActiveMesh features from **aviatrix_spoke_gateway** and **aviatrix_transit_gateway**
 
@@ -884,7 +902,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Firewall Network
+#### Firewall Network:
 1. Implemented support for AzureGov cloud in **aviatrix_firewall_instance**
 
 ### Enhancements:
@@ -910,7 +928,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Gateway
+#### Gateway:
 1. Implemented support for Selective Gateway Upgrade in **aviatrix_gateway** with the following new attributes:
   - ``software_version``
   - ``peering_ha_software_version``
@@ -926,7 +944,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
   - ``eip``
   - ``peering_ha_eip``
 
-#### Multi-Cloud Transit
+#### Multi-Cloud Transit:
 1. Implemented support for Selective Gateway Upgrade in **aviatrix_spoke_gateway** and **aviatrix_transit_gateway** with the following new attributes:
   - ``software_version``
   - ``ha_software_version``
@@ -942,15 +960,15 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
   - ``ha_eip``
 4. Updated the format for ``remote_vpc_name`` in **aviatrix_transit_external_device_conn** for BGP over LAN connections to "<vnet_name>:<vnet_resource_group>:<subscription_id>"
 
-#### CloudWAN
+#### CloudWAN:
 1. Implemented support for Selective Gateway Upgrade in **aviatrix_device_registration** when used for CloudN as a Gateway with the following new attributes:
   - ``software_version``
   - ``is_caag``
 
-#### Useful Tools
+#### Useful Tools:
 1. Implemented cross-subscription support for **aviatrix_vpc** for Azure by updating ``vpc_id`` to the new following 3-tuple format: "<vnet-name>:<resource-group-name>:<GUID>"
 
-#### Settings
+#### Settings:
 1. Implemented support for Selective Gateway Upgrade in **aviatrix_controller_config** with the following new attributes:
   - ``manage_gateway_upgrades``
   - ``current_version``
@@ -972,7 +990,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 - Supported Terraform version: **v1.x**
 
 ### Features:
-#### Accounts
+#### Accounts:
 1. Implemented support for AWSTS in **aviatrix_account** and data source with the following new attributes:
   - ``awsts_account_number``
   - ``awsts_cap_url``
@@ -992,22 +1010,22 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
   - ``awss_cap_cert_key``
   - ``awss_ca_chain_cert``
 
-#### Firewall Network
+#### Firewall Network:
 1. Implemented support for Fail Close and Network List Excluded From East-West Inspection in **aviatrix_firenet**
 
-#### Gateway
+#### Gateway:
 1. Implemented support for applying route entry in **aviatrix_gateway_dnat**
 2. Implemented support for AWS Top Secret cloud in **aviatrix_gateway**
 3. Implemented support for AWS Secret cloud in **aviatrix_gateway**
 4. Implemented support for configuring gateway keepalive settings
   - **aviatrix_controller_gateway_keepalive_config**
 
-#### Multi-Cloud Transit
+#### Multi-Cloud Transit:
 1. Implemented support for AWS Top Secret cloud  in **aviatrix_spoke_gateway**
 2. Implemented support for AWS Secret cloud in **aviatrix_transit_gateway**
 3. Implemented support for connection based BGP prepending in **aviatrix_transit_external_device_conn** and **aviatrix_vgw_conn**
 
-#### TGW Orchestrator
+#### TGW Orchestrator:
 1. Implemented support for the following attribute in **aviatrix_aws_tgw_vpn_conn**
   - ``enable_global_acceleration``
 
@@ -1057,19 +1075,19 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 - Supported Terraform version: **v0.12.x**, **v0.13.x**, **v0.14.x** and **v0.15.x**
 
 ### Features:
-#### Firewall Network
+#### Firewall Network:
 1. Implemented support for the following attributes for OCI in **aviatrix_firewall_instance**:
   - ``availability_domain``
   - ``fault_domain``
 
-#### Gateway
+#### Gateway:
 1. Implemented support for the following attributes for OCI in **aviatrix_gateway** and data source:
   - ``availability_domain``
   - ``fault_domain``
   - ``peering_ha_availability_domain``
   - ``peering_ha_fault_domain``
 
-#### Multi-Cloud Transit
+#### Multi-Cloud Transit:
 1. Implemented support for the following attributes for OCI in **aviatrix_spoke_gateway** and **aviatrix_transit_gateway** and data source:
   - ``availability_domain``
   - ``fault_domain``
@@ -1088,7 +1106,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 - Supported Terraform version: **v0.12.x**, **v0.13.x** and **v0.14.x**
 
 ### Features:
-#### Accounts
+#### Accounts:
 1. Implemented support for AWSGov IAM role-based in **aviatrix_account** and data source with the following new attributes:
   - ``awsgov_iam``
   - ``awsgov_role_app``
@@ -1106,7 +1124,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 - Supported Terraform version: **v0.12.x**, **v0.13.x** and **v0.14.x**
 
 ### Features:
-#### Accounts
+#### Accounts:
 1. Implemented support for Alibaba Cloud in **aviatrix_account** and data source
 2. Implemented support for AzureChina, AzureGov and AWSChina clouds in **aviatrix_account**
 3. Implemented support for separate IAM role and policy for gateways in AWS **aviatrix_account** with new attributes
@@ -1115,11 +1133,11 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 4. Implemented support for enabling auditing in **aviatrix_account**:
   - New attribute ``audit_account``
 
-#### CloudWAN
+#### CloudWAN:
 1. Implemented support for enabling event triggered HA for Site2Cloud type connection resources:
   - New attribute ``enable_event_triggered_ha`` in **aviatrix_device_transit_gateway_attachment**
 
-#### Firewall Network
+#### Firewall Network:
 1. Implemented support for GCP FireNet with Fortinet and CheckPoint firewall vendors
 2. Implemented support for TGW segmentation for Egress in TGW FireNet workflows:
   - New attribute ``tgw_segmentation_for_egress_enabled`` in **aviatrix_firenet** and data source
@@ -1129,13 +1147,13 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 5. Implemented custom AMI support for Firewall instance, allowing customers to launch special images provided by firewall vendors:
   - New attribute ``firewall_image_id`` in **aviatrix_firewall_instance**
 
-#### Gateway
+#### Gateway:
 1. Implemented support for Alibaba Cloud in **aviatrix_gateway** and data source
 2. Implemented support for AzureGov, AWSChina and AzureChina clouds in **aviatrix_gateway**
 3. Implemented support for IPSec tunnel down detection time in **aviatrix_gateway**:
   - New attribute ``tunnel_detection_time``
 
-#### Multi-Cloud Transit
+#### Multi-Cloud Transit:
 1. Implemented support for the following attributes in **aviatrix_spoke_gateway**:
   - ``enable_private_vpc_default_route``
   - ``enable_skip_public_route_table_update``
@@ -1160,7 +1178,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 12. Implemented support for phase 1 remote identifier in **aviatrix_transit_external_device_conn**:
   - New attribute ``phase1_remote_identifier``
 
-#### Settings
+#### Settings:
 1. Implemented support for associating a Controller with a CoPilot instance, allowing user login without a username and password:
   - New resource **aviatrix_copilot_association**
 2. Implemented support for adding profile names to Remote Syslog configs:
@@ -1172,7 +1190,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 5. Implemented support for BGP max AS limit controller configuration:
   - New resource **aviatrix_controller_bgp_max_as_limit_config**
 
-#### Site2Cloud
+#### Site2Cloud:
 1. Implemented support for enabling event triggered HA for Site2Cloud resource:
   - New attribute ``enable_event_triggered_ha`` in **aviatrix_site2cloud**
 2. Implemented support for setting optional tunnel IP address with the following attributes in **aviatrix_site2cloud**:
@@ -1185,14 +1203,14 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 4. Implemented support for phase 1 remote identifier for Site2Cloud:
   - New attribute ``phase1_remote_identifier`` in **aviatrix_site2cloud**
 
-#### TGW Orchestrator
+#### TGW Orchestrator:
 1. Implemented new resources to decouple ``security_domains`` out of **aviatrix_aws_tgw**:
   - **aviatrix_aws_tgw_security_domain**
   - **aviatrix_aws_tgw_security_domain_connection**
 2. Implemented support for TGW intra-domain inspection:
   - New resource **aviatrix_aws_tgw_intra_domain_inspection**
 
-#### Useful Tools
+#### Useful Tools:
 1. Implemented support for Alibaba Cloud in **aviatrix_vpc** and data source
 2. Implemented support for AzureGov, AWSChina and AzureChina clouds in **aviatrix_vpc**
 3. Implemented support for creating an **aviatrix_vpc** in Azure with an existing ``resource_group``
@@ -1881,7 +1899,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
 - Supported Controller version: **UserConnect-5.0.2632**
 - Supported Terraform version: **v0.12.x**
 
-### Features
+### Features:
 1. Added support for Insane Mode for ARM (Azure Resource Manager) in the following resources:
   - **aviatrix_gateway**
   - **aviatrix_spoke_gateway**
@@ -1893,7 +1911,7 @@ Please follow the guide [here](https://registry.terraform.io/providers/AviatrixS
   - **aviatrix_spoke_gateway**
   - **aviatrix_transit_gateway**
 
-### Enhancements
+### Enhancements:
 1. Added ``subnet_id`` as an output attribute for **aviatrix_vpc**
 2. Added support to edit ``vpn_cidr`` by gateway instead of just load balancer
 
@@ -2232,4 +2250,4 @@ Please see the [R2.0 feature changelist table](https://www.terraform.io/docs/pro
   - **resource_aviatrix_version**
   - **resource_aviatrix_vgw_conn**
   - **resource_aviatrix_vpn_profile**
-  - **resource_aviatrix_vpn_user**
+- **resource_aviatrix_vpn_user**

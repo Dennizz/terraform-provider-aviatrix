@@ -16,6 +16,7 @@ import (
 	"os"
 	"reflect"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/ajg/form"
@@ -45,8 +46,9 @@ type APIRequest struct {
 //go:generate moq -rm -out client_mock.go . ClientInterface
 type ClientInterface interface {
 	DeleteAccount(account *Account) error
-	GetAccount(account *Account) (*Account, error)
+	GetAccount(account *Account) (Account, error)
 	AuditAccount(ctx context.Context, account *Account) error
+	InvalidateCache()
 }
 
 // Client for accessing the Aviatrix Controller
@@ -59,6 +61,8 @@ type Client struct {
 	ControllerIP     string
 	baseURL          string
 	IgnoreTagsConfig *IgnoreTagsConfig
+	cachedAccounts   []Account
+	cacheMutex       sync.Mutex
 }
 
 type GetApiTokenResp struct {
